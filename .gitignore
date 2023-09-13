@@ -152,3 +152,7 @@ media/
 build_tests/
 yap_testing
 html/img/img/
+
+# My ignore
+/html
+/static_dev

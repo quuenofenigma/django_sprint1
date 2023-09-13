@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 
 posts = [
@@ -52,6 +53,10 @@ def index(request):
 
 def post_detail(request, id):
     template = 'blog/detail.html'
+    try:
+        posts[id]
+    except IndexError:
+        raise Http404('There is no such entry on our blog!')
     return render(request, template, {'post': posts[id]})
 
 
