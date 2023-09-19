@@ -48,15 +48,16 @@ posts = [
 
 def index(request):
     template = 'blog/index.html'
-    return render(request, template, {'posts': posts[::-1]})
+    return render(request, template, {'posts': posts})
 
 
 def post_detail(request, id):
     template = 'blog/detail.html'
     try:
-        return render(request, template, {'post': posts[id]})
-    except IndexError:
+        post = {post["id"]: post for post in posts[::-1]}[id]
+    except KeyError:
         raise Http404('There is no such entry on our blog!')
+    return render(request, template, {'post': post})
 
 
 def category_posts(request, category_slug):
